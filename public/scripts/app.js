@@ -25,7 +25,6 @@ var onRemove = function onRemove() {
 };
 
 var appRoot = document.getElementById('app');
-
 var render = function render() {
   var template = React.createElement(
     'div',
@@ -51,23 +50,21 @@ var render = function render() {
       app.options.length
     ),
     React.createElement(
-      'ol',
-      null,
-      React.createElement(
-        'li',
-        null,
-        'Item one'
-      ),
-      React.createElement(
-        'li',
-        null,
-        'Item two'
-      )
-    ),
-    React.createElement(
       'button',
       { onClick: onRemove },
       'Remove All'
+    ),
+    React.createElement(
+      'ol',
+      null,
+      app.options.map(function (option) {
+        return React.createElement(
+          'li',
+          { key: option },
+          'your option: ',
+          option
+        );
+      })
     ),
     React.createElement(
       'form',
