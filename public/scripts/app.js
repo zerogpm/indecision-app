@@ -1,70 +1,116 @@
 'use strict';
 
-// const square = function(x) {
-//   return x * x;
-// };
-//
-// const squareArrow = (x) => x * x;
-//
-// console.log(squareArrow(3));
+console.log('App.js is running!');
 
-// const getFirstName = (fullName) => fullName.split(" ")[0];
-//
-// console.log(getFirstName('Chris su'));
+var app = {
+  title: 'Indecision App',
+  subtitle: 'This is some info',
+  options: ['One', 'Two']
+};
 
-// const add2 = function (a, b) {
-//   console.log(this);
-//   return a + b;
-// };
-//
-// const add =  (a, b) => {
-//   console.log(this);
-//   return a + b;
-// };
-//
-// console.log(add2(4,4));
-
-// const user = {
-//   name: 'Chris',
-//   cities: ['Vancouver', 'New York'],
-//   printPlacesLived: function () {
-//     console.log(this.cities);
-//     console.log(this);
-//     this.cities.forEach((city) => {
-//       console.log(this.name + city);
-//     });
-//   }
-// };
+// JSX - JavaScript XML
+var template = React.createElement(
+  'div',
+  null,
+  React.createElement(
+    'h1',
+    null,
+    app.title
+  ),
+  app.subtitle && React.createElement(
+    'p',
+    null,
+    app.subtitle
+  ),
+  React.createElement(
+    'p',
+    null,
+    app.options.length > 0 ? 'Here are your options' : 'No options'
+  ),
+  React.createElement(
+    'ol',
+    null,
+    React.createElement(
+      'li',
+      null,
+      'Item one'
+    ),
+    React.createElement(
+      'li',
+      null,
+      'Item two'
+    )
+  )
+);
 
 var user = {
-  name: 'Chris',
-  cities: ['Vancouver', 'New York'],
-  printPlacesLived: function printPlacesLived() {
-    var _this = this;
-
-    console.log(this.cities);
-    console.log(this);
-    return this.cities.map(function (city) {
-      return _this.name + ' has live in ' + city;
-    });
-    // return this.cities.forEach((city) => {
-    //   console.log(city);
-    // });
-  }
+  name: 'Mike',
+  age: 26,
+  location: 'Vancouver'
 };
 
-console.log(user.printPlacesLived());
+function getLocation(user) {
+  return user.location ? React.createElement(
+    'p',
+    null,
+    'location ',
+    user.location
+  ) : undefined;
+}
 
-var multiplier = {
-  number: [2, 3, 4, 5],
-  multiplyBy: 2,
-  multiple: function multiple() {
-    var _this2 = this;
+var template2 = React.createElement(
+  'div',
+  null,
+  React.createElement(
+    'h1',
+    null,
+    user.name ? user.name : 'No Name'
+  ),
+  user.age && user.age >= 18 && React.createElement(
+    'p',
+    null,
+    'Age: ',
+    user.age
+  ),
+  getLocation(user)
+);
 
-    return this.number.map(function (number) {
-      return number * _this2.multiplyBy;
-    });
-  }
+var count = 0;
+var addOne = function addOne() {
+  return console.log('+1');
 };
+var minusOne = function minusOne() {
+  return console.log('-1');
+};
+var reset = function reset() {
+  return console.log('reset');
+};
+var template3 = React.createElement(
+  'div',
+  null,
+  React.createElement(
+    'h1',
+    null,
+    'Count: ',
+    count
+  ),
+  React.createElement(
+    'button',
+    { onClick: addOne },
+    '+1'
+  ),
+  React.createElement(
+    'button',
+    { onClick: minusOne },
+    '-1'
+  ),
+  React.createElement(
+    'button',
+    { onClick: reset },
+    'Reset'
+  )
+);
 
-console.log(multiplier.multiple());
+var appRoot = document.getElementById('app');
+
+ReactDOM.render(template3, appRoot);
