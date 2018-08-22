@@ -114,7 +114,7 @@ var renderCounterApp = function renderCounterApp() {
     React.createElement(
       'button',
       { onClick: reset },
-      'Reset number'
+      'Reset Number'
     )
   );
   ReactDOM.render(template3, appRoot);

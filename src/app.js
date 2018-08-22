@@ -59,7 +59,7 @@ const renderCounterApp = () => {
       <h1>Count: {count}</h1>
       <button onClick={addOne}>+1</button>
       <button onClick={minusOne}>-1</button>
-      <button onClick={reset}>Reset number</button>
+      <button onClick={reset}>Reset Number</button>
     </div>
   );
   ReactDOM.render(template3, appRoot);
