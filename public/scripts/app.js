@@ -27,6 +27,38 @@ var IndecisionApp = function (_React$Component) {
   }
 
   _createClass(IndecisionApp, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+
+      try {
+        var json = localStorage.getItem('options');
+        var options = JSON.parse(json);
+
+        if (options) {
+          this.setState(function () {
+            return {
+              options: options
+            };
+          });
+        }
+      } catch (e) {
+        //Do nothing
+      }
+    }
+  }, {
+    key: 'componentDidUpdate',
+    value: function componentDidUpdate(prevProps, prevState) {
+      if (prevState.options.length !== this.state.options.length) {
+        var json = JSON.stringify(this.state.options);
+        localStorage.setItem('options', json);
+      }
+    }
+  }, {
+    key: 'componentWillUnmount',
+    value: function componentWillUnmount() {
+      console.log('un mount');
+    }
+  }, {
     key: 'handlePick',
     value: function handlePick() {
       var randomNum = Math.floor(Math.random() * this.state.options.length);
@@ -56,7 +88,7 @@ var IndecisionApp = function (_React$Component) {
     value: function handleAddOption(option) {
 
       if (!option) {
-        return 'Enter vaild value to add item';
+        return 'Enter valid value to add item';
       } else if (this.state.options.indexOf(option) > -1) {
         return 'This option already exists';
       }
@@ -141,6 +173,11 @@ var Options = function Options(props) {
       { onClick: props.handleDeleteOptions },
       'Remove All'
     ),
+    props.options.length === 0 && React.createElement(
+      'p',
+      null,
+      'Please add an option to get started'
+    ),
     React.createElement(
       'ol',
       null,
@@ -195,11 +232,13 @@ var AddOption = function (_React$Component2) {
     value: function handleAddOption(e) {
       e.preventDefault();
       var option = e.target.elements.option.value.trim();
-      e.target.elements.option.value = '';
       var error = this.props.handleAddOption(option);
       this.setState(function () {
         return { error: error };
       });
+      if (!error) {
+        e.target.elements.option.value = '';
+      }
     }
   }, {
     key: 'render',
