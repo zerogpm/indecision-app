@@ -1,3 +1,5 @@
 # Run project
 
-`yarn build`
+`yarn run serve`
+
+`yarn run build`
